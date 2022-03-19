@@ -125,8 +125,7 @@ extension AttributedStringRenderer {
     let result = NSMutableAttributedString()
 
     var itemState = state
-    itemState.paragraphSpacing =
-      bulletList.tight ? 0 : environment.style.measurements.paragraphSpacing
+    itemState.paragraphSpacing = spacingBetweenListItems(tight: bulletList.tight)
     itemState.headIndent += environment.style.measurements.headIndentStep
     itemState.tabStops.append(
       contentsOf: [
@@ -179,8 +178,7 @@ extension AttributedStringRenderer {
     )
 
     var itemState = state
-    itemState.paragraphSpacing =
-      orderedList.tight ? 0 : environment.style.measurements.paragraphSpacing
+    itemState.paragraphSpacing = spacingBetweenListItems(tight: orderedList.tight)
     itemState.headIndent += headIndentStep
     itemState.tabStops.append(
       contentsOf: [
@@ -508,6 +506,18 @@ extension AttributedStringRenderer {
       )
     }
     return result
+  }
+
+  private func spacingBetweenListItems(tight: Bool) -> CGFloat {
+    if let listSpacing = environment.style.measurements.listSpacing {
+      return listSpacing
+    }
+
+    if tight {
+      return 0
+    }
+
+    return environment.style.measurements.paragraphSpacing
   }
 }
 

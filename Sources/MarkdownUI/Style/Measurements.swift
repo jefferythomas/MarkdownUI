@@ -18,6 +18,9 @@ extension MarkdownStyle {
     /// The distance between the bottom of a paragraph and the top of the next, relative to the base font size.
     public var paragraphSpacing: CGFloat
 
+    /// The distance between items in a list, relative to the base font size.
+    public var listSpacing: CGFloat?
+
     /// The distance between a list marker and a list item, relative to the base font size.
     public var listMarkerSpacing: CGFloat
 
@@ -34,6 +37,8 @@ extension MarkdownStyle {
     ///   - tailIndentStep: The tail indentation size, relative to the base font size. The default is `-1`.
     ///   - paragraphSpacing: The distance between the bottom of a paragraph and the top of the next,
     ///                       relative to the base font size. The default is `1`.
+    ///   - listSpacing: The distance between items in a list, relative to the base font size.
+    ///                  Setting the value to `nil` uses the Common Mark rules. The default is `nil`.
     ///   - listMarkerSpacing: The distance between a list marker and a list item, relative to the base font size.
     ///                        The default is `0.47`.
     ///   - headingScales: The scale that the `Markdown` view applies to each heading level.
@@ -44,6 +49,7 @@ extension MarkdownStyle {
       headIndentStep: CGFloat = 1.97,
       tailIndentStep: CGFloat = -1,
       paragraphSpacing: CGFloat = 1,
+      listSpacing: CGFloat? = nil,
       listMarkerSpacing: CGFloat = 0.47,
       headingScales: HeadingScales = .default,
       headingSpacing: CGFloat = 0.67
@@ -52,6 +58,7 @@ extension MarkdownStyle {
       self.headIndentStep = headIndentStep
       self.tailIndentStep = tailIndentStep
       self.paragraphSpacing = paragraphSpacing
+      self.listSpacing = listSpacing
       self.listMarkerSpacing = listMarkerSpacing
       self.headingScales = headingScales
       self.headingSpacing = headingSpacing
