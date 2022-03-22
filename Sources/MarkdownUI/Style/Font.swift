@@ -145,6 +145,33 @@ extension MarkdownStyle.Font {
       )
     )
   }
+
+  /// Add a single character style to the font.
+  ///
+  /// - Parameters:
+  ///   - characterStyle: A character style to add to the font.
+  /// - Returns: A font with the character style applied.
+  public func characterStyle(_ characterStyle: MarkdownStyle.CharacterStyle) -> MarkdownStyle.Font {
+    switch characterStyle {
+    case .bold: return bold()
+    case .italic: return italic()
+    case .monospacedDigit: return monospacedDigit()
+    case .monospaced: return monospaced()
+    }
+  }
+
+  /// Adds all the character styles to the font.
+  ///
+  /// - Parameters:
+  ///   - characterStyles: The character styles to add to the font.
+  /// - Returns: A font with all the character styles applied.
+  public func characterStyles<S>(_ characterStyles: S) -> MarkdownStyle.Font
+  where S: Sequence, S.Element == MarkdownStyle.CharacterStyle
+  {
+    characterStyles.reduce(self) { font, characterStyle in
+      font.characterStyle(characterStyle)
+    }
+  }
 }
 
 // MARK: - FontProvider

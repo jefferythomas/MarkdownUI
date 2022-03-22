@@ -310,9 +310,9 @@ extension AttributedStringRenderer {
     let result = renderParagraphEdits(state: state)
 
     var inlineState = state
-    inlineState.font = inlineState.font.bold().scale(
-      environment.style.measurements.headingScales[heading.level - 1]
-    )
+    inlineState.font = inlineState.font
+      .characterStyles(environment.style.characterStyles.characterStylesForHeading(level: heading.level))
+      .scale(environment.style.measurements.headingScales[heading.level - 1])
 
     result.append(renderInlines(heading.text, state: inlineState))
 
